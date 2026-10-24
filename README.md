@@ -1,7 +1,6 @@
 LUNZ-ARC: Trustworthy AI for Tokamak Plasma Control
-https://img.shields.io/badge/License-MIT-yellow.svg
-https://img.shields.io/badge/python-3.10+-blue.svg
-https://img.shields.io/badge/Paper-Under%20Review-brightgreen
+<img width="2220" height="1170" alt="fig4_benchmark" src="https://github.com/user-attachments/assets/300ac2f3-522c-47e7-966b-91e78cd0dbe4" />
+
 
 📖 Overview
 LUNZ-ARC is a Multi-Agent Reinforcement Learning (MARL) architecture designed for the safe, robust stabilization of magnetically confined plasmas in tokamak fusion reactors.
