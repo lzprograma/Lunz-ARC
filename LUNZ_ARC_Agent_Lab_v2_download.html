@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUNZ-ARC | Agent Lab</title>
+<style>
+:root{--bg:#f3f5f7;--surface:#fff;--line:#d9e0e6;--ink:#1a2530;--muted:#657381;--soft:#eef2f5;--navy:#23394d;--blue:#28628a;--cyan:#54b9c5;--green:#23765e;--amber:#98631f;--red:#b3444a;--radius:10px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px}button,input,select{font:inherit}button,select{cursor:pointer}button{border:1px solid #cbd4dc;border-radius:7px;background:#fff;color:var(--ink);padding:9px 12px;font-weight:600;transition:background .15s,border-color .15s}button:hover{background:#f4f7f9;border-color:#aab8c5}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #4883a9;outline-offset:2px}.primary{background:var(--navy);border-color:var(--navy);color:#fff}.primary:hover{background:#304d66;border-color:#304d66}.quiet{background:transparent}.danger{color:var(--red)}.shell{max-width:1480px;margin:0 auto;padding:22px 25px 18px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid var(--line);padding-bottom:17px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:13px}.mark{width:38px;height:38px;display:grid;place-items:center;border:1px solid #9babb8;border-radius:8px;color:var(--navy);font-size:13px;font-weight:800;letter-spacing:-.05em;background:#fff}.brandname{font-size:16px;font-weight:760;letter-spacing:.045em}.brandline{font-size:11px;color:var(--muted);margin-top:3px}.topmeta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}.tag{padding:6px 9px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--muted);font-size:11px;white-space:nowrap}.tag strong{color:var(--ink);font-weight:650}.tag.status{color:#24664f;background:#f2f8f5;border-color:#cce2d7}.tag.status:before{content:"";display:inline-block;width:6px;height:6px;background:#31866a;border-radius:50%;margin:0 7px 1px 0}.intro{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:19px}.intro h1{font-size:26px;letter-spacing:-.035em;font-weight:680;margin:0}.intro p{font-size:13px;line-height:1.55;color:var(--muted);margin:7px 0 0;max-width:700px}.intro-note{font-size:11px;line-height:1.5;color:#7d5a29;background:#fbf6ed;border:1px solid #ead9b8;border-radius:7px;padding:9px 11px;max-width:300px}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr);gap:16px;align-items:start}.stack{display:flex;flex-direction:column;gap:16px;min-width:0}.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid var(--line)}.panel-title{font-size:13px;font-weight:700}.panel-sub{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}.section-no{font-size:10px;font-weight:750;letter-spacing:.09em;color:#7d8a96;margin-right:8px}.stage{background:#172733;position:relative}.stage canvas{width:100%;height:335px;display:block}.stage-label{position:absolute;top:13px;left:15px;color:#d6e1e8;font-size:10px;letter-spacing:.08em;text-transform:uppercase}.stage-clock{position:absolute;top:13px;right:15px;color:#a6bac6;font:11px ui-monospace,SFMono-Regular,Consolas,monospace}.stage-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;background:#1d303e;color:#d9e3e9;font-size:11px}.state-pill{padding:5px 8px;border-radius:5px;background:#eaf5f0;color:#276d53;font-weight:700;font-size:10px;letter-spacing:.035em}.state-pill.warn{background:#fbf1e1;color:#8d5d1e}.state-pill.bad{background:#fbeaec;color:#a33c42}.stage-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border-top:1px solid #314451}.buttons{display:flex;gap:7px;flex-wrap:wrap}.stage-controls label,.field-label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px}.small-field{min-width:150px}.small-field select,.field select{border:1px solid #cbd5de;border-radius:6px;background:#fff;padding:8px 10px;color:var(--ink);width:100%}.control-options{display:flex;align-items:end;gap:12px;flex-wrap:wrap}.slider-field{display:flex;align-items:center;gap:9px;min-width:170px}.slider-field input{width:100px;accent-color:var(--blue)}.slider-field output{font-size:11px;font-weight:650;min-width:30px;text-align:right}.agent-card{padding:15px 16px}.agent-top{display:flex;justify-content:space-between;align-items:start;gap:14px}.agent-type{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:750}.agent-card h2{font-size:19px;letter-spacing:-.025em;margin:5px 0 5px;font-weight:680}.agent-card p{font-size:12px;color:var(--muted);line-height:1.45;margin:0;max-width:390px}.field{margin-top:14px}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.field select{font-size:12px}.agent-facts{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.fact{font-size:10px;color:#536270;background:#f3f6f8;border:1px solid #e3e8ec;border-radius:5px;padding:5px 7px}.rule{height:1px;background:var(--line);margin:14px 0}.obs-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.obs{padding:10px;border:1px solid #e2e7eb;border-radius:7px;min-width:0}.obs-label{font-size:10px;color:var(--muted)}.obs-value{font-size:20px;font-weight:650;letter-spacing:-.035em;margin-top:5px;font-variant-numeric:tabular-nums}.obs-unit{font-size:10px;color:var(--muted);font-weight:500;margin-left:3px}.obs-bar{height:3px;background:#e9eef1;border-radius:3px;margin-top:8px;overflow:hidden}.obs-bar span{height:100%;display:block;background:var(--blue);width:0;transition:width .1s}.action-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.action-head strong{font-size:12px}.action-head span{font-size:10px;color:var(--muted)}.action-row{display:grid;grid-template-columns:115px 1fr 45px;align-items:center;gap:9px;margin:12px 0}.action-label{font-size:11px;color:#52616f}.action-track{height:7px;background:#e8edf1;border-radius:4px;overflow:hidden}.action-fill{height:100%;background:var(--blue);width:0;transition:width .1s}.action-value{text-align:right;font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:#344958}.decision{border-left:3px solid #8799a8;padding:10px 11px;background:#f5f7f8;color:#536270;font-size:11px;line-height:1.5;margin-top:14px}.decision strong{display:block;color:var(--ink);font-size:12px;margin-bottom:3px}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.metric{background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 14px;min-width:0}.metric-label{font-size:10px;color:var(--muted)}.metric-value{font-size:23px;font-weight:680;letter-spacing:-.04em;margin-top:7px;font-variant-numeric:tabular-nums;white-space:nowrap}.metric-foot{font-size:10px;color:#7b8792;margin-top:4px;line-height:1.35}.lower{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}.chart-box{padding:10px 14px 12px}.chart-box canvas{width:100%;height:180px;display:block}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin-top:5px}.legend span:before{content:"";display:inline-block;width:13px;height:2px;vertical-align:middle;background:var(--blue);margin-right:6px}.legend .inst:before{background:#d08a37}.log{padding:6px 15px 12px;max-height:225px;overflow:auto}.event{display:grid;grid-template-columns:50px 1fr;gap:9px;padding:9px 0;border-bottom:1px solid #edf0f2;font-size:11px;line-height:1.45}.event:last-child{border-bottom:0}.event-time{font:10px ui-monospace,SFMono-Regular,Consolas,monospace;color:#8995a0}.event strong{display:block;color:#283744;margin-bottom:2px;font-weight:650}.event p{margin:0;color:var(--muted)}.event.warn strong{color:var(--amber)}.event.bad strong{color:var(--red)}.benchmark{margin-top:16px}.benchmark-intro{display:flex;justify-content:space-between;align-items:end;gap:16px;padding:14px 16px;border-bottom:1px solid var(--line)}.benchmark-intro h2{font-size:15px;margin:0;font-weight:700}.benchmark-intro p{margin:5px 0 0;color:var(--muted);font-size:11px;line-height:1.45}.bench-result{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.bench-status{font-size:10px;color:#6b7885}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:780px;font-size:11px}th,td{padding:10px 13px;text-align:right;border-bottom:1px solid #e9edf0;white-space:nowrap}th{background:#f7f9fa;color:#64717e;font-size:10px;font-weight:750}th:first-child,td:first-child{text-align:left;min-width:190px}tbody tr:last-child td{border-bottom:0}.scenario-name{font-weight:650;color:#273743}.scenario-sub{font-size:10px;color:var(--muted);margin-top:3px}.cell-main{font-weight:700;font-variant-numeric:tabular-nums}.cell-sub{display:block;color:var(--muted);font-size:10px;margin-top:3px}.good{color:#247456}.mixed{color:#8f5c1c}.bad{color:#b3444a}.bench-note{padding:11px 15px;background:#fbfcfd;border-top:1px solid var(--line);font-size:10px;color:#687783;line-height:1.5}.footer{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px 2px 2px;color:#7a8792;font-size:10px;line-height:1.5}.footer strong{color:#52616f;font-weight:700}.empty{padding:22px;color:var(--muted);font-size:12px;text-align:center}.progress{height:3px;background:#e9eef1;overflow:hidden}.progress span{display:block;height:100%;width:0;background:#467f9e;transition:width .2s}.hidden{display:none!important}
+@media(max-width:1020px){.layout{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.intro{align-items:start;flex-direction:column}.intro-note{max-width:none}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.shell{padding:15px 12px}.topbar{align-items:start;flex-direction:column}.topmeta{justify-content:flex-start}.intro h1{font-size:23px}.panel-head{align-items:start}.stage canvas{height:275px}.stage-controls{align-items:start;flex-direction:column}.control-options{width:100%}.small-field{flex:1}.small-field select{min-width:0}.slider-field{width:100%;justify-content:space-between}.slider-field input{flex:1}.metrics{gap:7px}.metric{padding:11px}.metric-value{font-size:20px}.benchmark-intro{align-items:start;flex-direction:column}.obs-value{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="mark">L/ARC</div><div><div class="brandname">LUNZ-ARC <span style="font-weight:450;color:#71808d">/ Agent Lab</span></div><div class="brandline">Bancada de pesquisa · controle de plasma por aprendizagem por reforço</div></div></div>
+    <div class="topmeta"><span class="tag"><strong>Modelo:</strong> Q-learning tabular</span><span class="tag"><strong>Treino:</strong> 7.000 episódios</span><span class="tag status">Ambiente sintético</span></div>
+  </header>
+
+  <section class="intro">
+    <div><h1>Estabilização do plasma</h1><p>Teste a resposta do agente a desvios, pulsos e mudanças do ambiente. Compare a política aprendida com um controlador de feedback simples e com o sistema sem correção.</p></div>
+    <div class="intro-note"><strong>Escopo do modelo</strong><br>Dinâmica artificial de baixa ordem. Valores normalizados; não representam medições de um tokamak.</div>
+  </section>
+
+  <main class="layout">
+    <div class="stack">
+      <section class="panel">
+        <div class="panel-head"><div><div class="panel-title"><span class="section-no">01</span>Câmara de plasma</div><div class="panel-sub">Visualização qualitativa do deslocamento e da amplitude de instabilidade.</div></div><span id="liveState" class="state-pill">ESTÁVEL</span></div>
+        <div class="stage"><canvas id="plasmaCanvas" aria-label="Visualização ilustrativa do plasma"></canvas><div class="stage-label">Vista esquemática · não é diagnóstico físico</div><div class="stage-clock" id="clock">t + 00.0 s</div></div>
+        <div class="stage-footer"><span id="profileCaption">Perfil ativo: teste manual</span><span id="controlCaption">Controle: RL + proteção</span></div>
+        <div class="stage-controls">
+          <div class="buttons"><button id="runBtn" class="primary">Iniciar simulação</button><button id="injectBtn" class="danger">Injetar perturbação</button><button id="resetBtn" class="quiet">Reiniciar</button></div>
+          <div class="control-options">
+            <div class="small-field"><label for="profileSelect">Perfil de perturbação</label><select id="profileSelect"><option value="manual">Manual / aleatório</option><option value="unseen_doublet">Pulsos duplos</option><option value="unseen_sustained">Forçamento sustentado</option><option value="unseen_ramp">Rampa crescente</option><option value="unseen_cluster">Pulsos agrupados</option><option value="unseen_parameter_shift">Parâmetros alterados</option><option value="unseen_noisy_sensors">Sensores mais ruidosos</option></select></div>
+            <div class="slider-field"><label for="disturbanceLevel">Amplitude</label><input id="disturbanceLevel" type="range" min="10" max="100" value="65"><output id="disturbanceOut">65%</output></div>
+          </div>
+        </div>
+      </section>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Risco estimado</div><div class="metric-value" id="metricRisk">8%</div><div class="metric-foot">Índice composto do simulador</div></div>
+        <div class="metric"><div class="metric-label">Deslocamento radial</div><div class="metric-value" id="metricX">0,05</div><div class="metric-foot">Unidade normalizada</div></div>
+        <div class="metric"><div class="metric-label">Instabilidade</div><div class="metric-value" id="metricI">0,14</div><div class="metric-foot">Amplitude normalizada</div></div>
+        <div class="metric"><div class="metric-label">Tempo em baixo risco</div><div class="metric-value" id="metricStable">00:00</div><div class="metric-foot">Risco abaixo de 30%</div></div>
+      </div>
+      <div class="lower">
+        <section class="panel"><div class="panel-head"><div><div class="panel-title"><span class="section-no">02</span>Histórico de estado</div><div class="panel-sub">Últimos pontos observados durante a simulação.</div></div><span class="tag">janela móvel</span></div><div class="chart-box"><canvas id="historyCanvas" aria-label="Histórico de deslocamento e instabilidade"></canvas><div class="legend"><span>Deslocamento absoluto</span><span class="inst">Instabilidade</span></div></div></section>
+        <section class="panel"><div class="panel-head"><div><div class="panel-title"><span class="section-no">03</span>Registro de eventos</div><div class="panel-sub">Perturbações, mudanças de modo e decisões.</div></div><button id="clearLogBtn" class="quiet">Limpar</button></div><div id="eventLog" class="log"></div></section>
+      </div>
+    </div>
+
+    <div class="stack">
+      <section class="panel">
+        <div class="panel-head"><div><div class="panel-title"><span class="section-no">04</span>Agente de controle</div><div class="panel-sub">Política aprendida e observações usadas na decisão.</div></div><span class="tag" id="agentStatus">Ativo</span></div>
+        <div class="agent-card">
+          <div class="agent-top"><div><div class="agent-type">Política de estabilização</div><h2>Agente LUNZ-ARC</h2><p>Q-learning discreto sobre quatro observações: deslocamento, velocidade, instabilidade e carga de perturbação.</p></div></div>
+          <div class="field"><label for="modeSelect">Modo de controle</label><select id="modeSelect"><option value="guarded">RL com fallback de feedback</option><option value="rl">Política RL pura</option><option value="feedback">Feedback convencional</option><option value="off">Sem correção</option></select></div>
+          <div class="agent-facts"><span class="fact">4 observações</span><span class="fact">45 ações discretas</span><span class="fact">7.000 episódios de treino</span><span class="fact">Perturbações randomizadas</span></div>
+          <div class="rule"></div>
+          <div class="action-head"><strong>Estado observado</strong><span id="obsTimestamp">Atualização a cada 0,1 s</span></div>
+          <div class="obs-grid">
+            <div class="obs"><div class="obs-label">Deslocamento radial</div><div class="obs-value"><span id="obsX">0,05</span><span class="obs-unit">norm.</span></div><div class="obs-bar"><span id="barX"></span></div></div>
+            <div class="obs"><div class="obs-label">Velocidade radial</div><div class="obs-value"><span id="obsV">0,00</span><span class="obs-unit">norm./s</span></div><div class="obs-bar"><span id="barV"></span></div></div>
+            <div class="obs"><div class="obs-label">Amplitude de instabilidade</div><div class="obs-value"><span id="obsI">0,14</span><span class="obs-unit">norm.</span></div><div class="obs-bar"><span id="barI"></span></div></div>
+            <div class="obs"><div class="obs-label">Carga de perturbação</div><div class="obs-value"><span id="obsD">0</span><span class="obs-unit">norm.</span></div><div class="obs-bar"><span id="barD"></span></div></div>
+          </div>
+          <div class="rule"></div>
+          <div class="action-head"><strong>Comando selecionado</strong><span id="actionSource">Política aprendida</span></div>
+          <div class="action-row"><div class="action-label">Correção magnética</div><div class="action-track"><div class="action-fill" id="magFill"></div></div><div class="action-value" id="magValue">+0,00</div></div>
+          <div class="action-row"><div class="action-label">Amortecimento</div><div class="action-track"><div class="action-fill" id="dampFill" style="background:#c1843a"></div></div><div class="action-value" id="dampValue">0,00</div></div>
+          <div class="decision" id="decisionBox"><strong>Observando o estado inicial</strong>Inicie a simulação para ver as decisões e a resposta do sistema.</div>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div><div class="panel-title"><span class="section-no">05</span>Protocolo de validação</div><div class="panel-sub">O que este experimento mede — e o que não mede.</div></div></div>
+        <div style="padding:14px 16px;line-height:1.55;font-size:12px;color:#52616f">
+          <p style="margin:0 0 10px"><strong style="color:#263744">Pergunta:</strong> a política aprendida recupera o estado após perturbações que não apareceram no treino?</p>
+          <p style="margin:0 0 10px"><strong style="color:#263744">Comparadores:</strong> RL puro, RL com fallback, feedback convencional e controle desligado.</p>
+          <p style="margin:0"><strong style="color:#263744">Critérios:</strong> risco médio, permanência no ensaio, proporção de passos de alto risco e encerramentos prematuros.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <section class="panel benchmark">
+    <div class="benchmark-intro"><div><h2>Teste de generalização</h2><p>Seis classes de perturbação mantidas fora do treino. Cada linha resume 12 execuções sintéticas por modo; os modos recebem as mesmas sementes para tornar a comparação mais justa.</p></div><div class="bench-result"><span id="benchStatus" class="bench-status">Resultados de referência disponíveis</span><button id="benchBtn" class="primary">Executar benchmark</button></div></div>
+    <div class="progress"><span id="benchProgress"></span></div>
+    <div class="table-wrap"><table><thead><tr><th>Perturbação não vista no treino</th><th>RL puro</th><th>RL + fallback</th><th>Feedback</th><th>Sem controle</th></tr></thead><tbody id="benchBody"></tbody></table></div>
+    <div class="bench-note" id="benchNote">Resultado da execução de referência no ambiente sintético. “Sobrevivência” significa que o episódio completou 250 passos sem atingir o limite de instabilidade definido no simulador. Não é uma medida de segurança de um reator real.</div>
+  </section>
+  <footer class="footer"><span><strong>LUNZ-ARC Agent Lab</strong> · protótipo de pesquisa v2</span><span>Modelo sintético, sem dados de tokamak e sem conexão com equipamento físico.</span></footer>
+</div>
+<script>
+const MODEL = {"name":"LUNZ-ARC synthetic agent v2","algorithm":"Tabular Q-learning with domain randomization","observations":["radial_displacement","radial_velocity","instability_estimate","disturbance_load"],"bins":{"x":[-1.35,-1.125,-0.9000000000000001,-0.675,-0.45000000000000007,-0.2250000000000001,0.0,0.22499999999999987,0.44999999999999996,0.6749999999999998,0.8999999999999999,1.125,1.35],"v":[-1.25,-1.0,-0.75,-0.5,-0.25,0.0,0.25,0.5,0.75,1.0,1.25],"instability":[0.025,0.178125,0.33125000000000004,0.48437500000000006,0.6375000000000001,0.790625,0.9437500000000001,1.096875,1.25],"disturbance":[0.0,0.25,0.5,0.75,1.0]},"shape":[13,11,9,5],"actions":[[-1.0,0.0],[-1.0,0.25],[-1.0,0.5],[-1.0,0.75],[-1.0,1.0],[-0.75,0.0],[-0.75,0.25],[-0.75,0.5],[-0.75,0.75],[-0.75,1.0],[-0.5,0.0],[-0.5,0.25],[-0.5,0.5],[-0.5,0.75],[-0.5,1.0],[-0.25,0.0],[-0.25,0.25],[-0.25,0.5],[-0.25,0.75],[-0.25,1.0],[0.0,0.0],[0.0,0.25],[0.0,0.5],[0.0,0.75],[0.0,1.0],[0.25,0.0],[0.25,0.25],[0.25,0.5],[0.25,0.75],[0.25,1.0],[0.5,0.0],[0.5,0.25],[0.5,0.5],[0.5,0.75],[0.5,1.0],[0.75,0.0],[0.75,0.25],[0.75,0.5],[0.75,0.75],[0.75,1.0],[1.0,0.0],[1.0,0.25],[1.0,0.5],[1.0,0.75],[1.0,1.0]],"policy":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,44,0,0,0,0,1,7,0,0,0,28,7,2,2,0,9,2,2,0,0,4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,33,37,3,0,0,13,43,8,6,0,28,36,0,0,0,27,13,2,0,0,6,1,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,0,0,0,14,32,2,0,0,0,30,25,6,0,15,10,13,6,0,21,43,3,3,0,40,2,4,0,0,4,0,2,3,0,0,4,0,1,0,0,0,0,0,0,27,0,0,0,0,22,10,2,0,0,2,43,11,3,0,3,42,21,5,0,6,31,11,3,0,0,9,4,2,0,16,2,3,2,0,2,3,1,1,0,0,0,0,0,0,4,0,0,0,0,22,4,1,0,0,41,6,6,1,1,9,12,8,4,0,39,5,5,2,0,14,6,1,5,0,6,3,3,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,1,0,3,2,2,0,0,3,1,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,0,0,0,0,4,2,1,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,13,0,0,0,17,41,7,9,0,34,17,3,3,0,7,6,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,13,0,0,0,17,25,38,7,0,13,13,30,9,1,27,41,2,6,0,4,3,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,11,2,0,0,6,20,36,9,1,40,4,18,15,0,14,2,18,9,1,31,14,3,8,0,14,0,1,0,0,1,0,2,1,1,0,0,0,1,1,0,0,0,0,0,28,25,2,0,0,4,12,33,11,0,13,37,25,14,0,6,32,16,6,0,39,33,9,6,0,23,4,10,1,0,8,1,0,0,0,0,1,2,4,0,1,0,0,0,0,21,6,1,0,0,11,24,5,3,0,16,31,22,10,0,28,28,5,2,0,9,23,24,4,1,13,15,15,0,0,26,16,0,0,0,2,3,6,0,0,1,0,0,0,0,6,0,0,0,0,28,1,0,0,0,26,9,3,2,0,12,9,8,4,0,34,19,20,2,0,21,6,11,3,0,5,4,5,1,0,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,4,5,1,0,0,0,1,1,0,0,7,5,3,0,0,1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,2,0,0,0,4,2,1,4,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,30,1,0,0,35,9,9,14,0,11,25,11,7,1,0,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,35,4,0,0,41,3,12,20,0,33,33,14,22,1,5,30,5,4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,44,32,9,0,0,33,28,1,23,1,27,42,42,9,0,43,15,13,1,0,0,4,1,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,7,7,0,0,36,34,12,20,1,3,5,41,6,0,0,38,24,0,0,11,8,4,5,0,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,25,4,0,0,15,22,36,9,0,29,33,13,9,0,8,36,4,3,0,44,8,3,3,0,23,4,3,2,0,7,0,0,0,0,2,0,1,0,0,1,0,0,1,0,14,4,1,0,0,19,8,12,4,0,30,21,17,10,0,26,10,5,3,0,26,15,6,4,0,33,4,5,3,0,8,11,2,0,0,3,0,2,2,0,0,0,1,0,0,3,0,0,0,0,6,3,3,0,0,5,3,6,4,0,10,8,5,3,0,8,22,7,2,0,10,7,4,0,0,8,4,2,0,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,2,2,0,1,0,1,0,1,0,0,6,3,1,0,0,1,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,8,0,0,0,3,5,3,6,1,0,0,1,1,1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,39,5,1,0,0,11,34,29,14,0,4,18,19,11,1,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,38,40,21,1,0,15,23,18,26,0,21,30,3,21,0,0,3,5,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,16,34,0,0,12,22,34,32,0,4,6,13,31,0,4,3,11,8,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,30,3,0,5,30,31,20,0,19,8,32,19,1,29,25,15,11,0,4,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,27,8,0,0,16,40,1,21,0,42,44,29,12,0,44,24,30,5,0,21,4,0,0,0,9,1,0,0,0,2,1,2,0,0,0,0,0,0,0,0,0,1,0,0,14,21,4,0,0,27,36,24,5,1,20,9,20,7,2,29,11,9,6,0,29,10,1,2,0,30,5,1,0,0,4,2,1,0,0,2,0,0,0,0,0,0,0,0,0,15,1,1,0,0,6,1,16,3,0,26,10,13,1,0,15,9,5,2,0,12,22,11,0,0,15,4,5,0,0,8,4,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,2,0,0,4,4,6,1,0,6,8,4,1,0,7,5,1,0,0,8,5,1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,5,0,0,0,0,0,2,2,0,0,1,2,2,1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,29,33,0,0,35,32,35,24,1,5,6,20,19,2,0,0,0,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,4,1,2,0,0,8,38,6,1,23,3,17,33,3,0,2,4,3,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,4,3,0,20,0,11,43,4,13,3,34,30,1,0,10,21,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,37,9,1,0,11,42,22,39,0,2,36,1,35,0,3,24,23,11,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,3,28,1,0,0,14,21,4,1,18,38,23,15,0,17,25,14,7,0,24,0,1,1,0,10,5,0,1,0,0,2,2,0,0,0,0,0,1,0,0,0,0,0,0,9,27,6,1,0,22,25,44,33,0,35,20,29,5,0,26,20,22,4,0,16,2,2,2,1,17,3,2,0,0,1,4,1,1,0,0,3,0,0,0,0,0,0,0,0,15,5,2,0,0,6,12,20,15,0,19,16,15,3,0,24,8,10,2,0,19,18,7,2,0,10,7,0,0,0,3,2,1,0,0,2,5,0,0,0,0,1,0,0,0,3,1,0,0,0,2,4,3,0,0,0,2,2,0,1,8,1,10,1,0,6,9,3,1,0,9,7,1,0,0,6,9,1,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,2,1,0,0,2,2,1,0,0,0,5,0,0,0,2,0,0,0,0,4,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,1,0,1,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,26,36,0,0,33,20,38,30,1,6,3,11,22,0,0,0,0,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,22,20,0,40,5,33,7,24,7,26,42,19,4,0,0,4,23,4,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,8,24,0,20,20,4,33,20,36,13,31,44,5,0,3,30,43,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,5,8,42,0,8,36,33,2,8,6,26,10,9,3,0,8,11,15,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,32,38,1,5,0,1,5,17,4,11,5,35,34,21,5,4,20,22,12,0,1,1,0,4,0,1,0,3,3,0,0,1,2,2,0,0,0,1,0,0,0,0,0,0,0,42,12,40,4,0,23,26,31,2,8,41,38,26,28,2,29,29,27,7,0,16,10,5,3,0,12,0,2,3,0,2,4,1,1,0,1,0,2,1,0,0,0,1,0,0,7,22,7,1,0,28,29,37,18,0,32,15,16,2,0,19,12,16,5,0,26,7,6,3,0,9,3,3,1,0,3,4,2,0,0,2,1,0,0,0,0,1,0,0,0,3,2,3,0,0,3,2,2,1,0,3,4,0,0,0,10,7,5,1,0,8,11,1,1,0,5,7,0,0,0,7,6,0,0,0,1,5,0,0,0,1,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,2,0,0,0,3,4,1,0,0,2,4,3,0,0,1,3,0,1,0,2,2,1,0,0,4,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,34,6,0,0,31,15,30,32,1,4,0,3,9,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,44,33,29,0,8,6,38,16,37,44,33,38,15,9,0,0,6,10,4,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,2,22,0,3,7,18,36,17,2,15,42,42,19,2,6,15,31,2,2,0,2,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,22,21,14,0,9,18,23,32,13,31,26,32,4,7,2,4,19,31,0,1,2,2,0,0,4,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,36,44,31,25,0,32,41,32,8,31,5,21,20,25,15,3,8,30,19,0,3,3,2,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,31,7,7,37,0,7,21,21,11,41,36,33,2,22,8,13,24,24,10,2,14,2,2,0,0,9,3,7,2,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,44,19,0,0,4,32,33,28,1,31,24,27,35,1,38,11,12,9,0,23,4,5,1,0,8,2,0,1,0,1,4,1,0,0,1,1,1,1,0,0,1,0,0,0,6,3,1,0,0,4,4,4,1,0,10,6,2,0,0,7,6,6,0,0,12,9,6,1,0,3,7,1,1,0,10,5,0,0,0,0,1,2,0,0,0,1,1,0,0,3,0,1,0,0,0,3,0,0,0,1,1,0,0,0,3,8,0,0,0,3,4,2,0,0,3,8,0,1,0,2,2,1,0,0,0,3,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,4,0,0,0,14,3,8,8,1,4,0,1,5,0,0,0,0,4,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,43,8,44,3,0,38,35,12,17,9,34,16,11,27,1,11,1,1,4,0,0,0,1,1,0,1,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,42,18,9,0,2,8,38,42,9,10,43,4,37,3,29,3,8,13,2,0,0,2,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,35,25,21,0,28,28,42,10,8,40,16,44,22,5,5,14,35,25,1,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,35,30,7,0,13,40,40,30,12,40,25,10,40,7,9,27,19,27,1,0,0,0,3,0,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,11,3,17,44,0,10,6,39,1,20,34,39,42,23,6,31,28,32,17,0,10,5,2,3,0,6,4,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,2,10,44,4,0,4,15,8,17,0,35,32,43,44,2,37,24,17,11,0,11,6,6,1,0,8,3,3,1,0,5,0,0,0,0,0,1,0,0,0,2,0,0,0,0,23,8,3,0,0,4,4,8,4,0,6,8,11,5,0,8,10,7,2,0,20,15,5,0,0,13,4,1,0,0,3,3,0,1,0,0,0,0,0,0,0,1,2,0,0,3,0,0,0,0,0,5,0,0,0,2,0,0,0,0,4,11,2,0,0,4,4,1,0,0,5,6,1,0,0,3,1,1,1,0,0,1,0,0,0,2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,3,0,0,0,4,0,6,7,1,4,0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,32,3,9,0,0,19,34,30,19,0,10,19,6,4,0,38,2,2,4,0,2,0,0,2,0,3,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,24,6,1,0,6,15,25,29,2,30,35,44,21,2,11,35,3,6,1,5,3,0,1,0,0,0,2,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,41,15,43,4,0,22,20,15,1,2,42,10,38,15,1,34,42,18,9,0,4,1,1,2,0,0,2,1,0,0,0,4,1,0,0,0,0,0,0,0,0,0,0,0,0,42,25,4,4,0,30,22,44,20,1,2,28,21,40,1,29,34,39,8,0,2,2,5,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,15,3,40,0,0,27,19,20,23,2,26,28,13,44,2,42,40,39,10,1,2,4,4,3,1,0,3,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,43,27,32,0,0,6,39,38,40,0,41,16,41,28,0,25,13,20,16,0,14,6,5,6,0,7,4,2,0,0,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,25,7,7,0,0,5,8,10,7,0,14,13,16,9,0,6,10,7,4,1,16,15,6,1,0,11,8,1,0,0,4,4,0,0,0,1,2,0,0,0,1,0,0,0,0,3,1,0,0,0,1,4,4,0,0,6,0,4,0,0,5,11,5,0,0,5,5,1,0,0,6,3,1,1,0,7,3,4,1,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,3,1,4,0,0,1,0,0,0,0,2,0,0,1,2,0,1,0,0,0,0,1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,35,7,4,0,0,19,11,15,7,1,21,8,3,4,0,40,4,0,1,0,12,0,2,0,0,4,1,0,1,0,2,1,1,2,0,0,0,0,0,0,0,0,0,0,0,34,13,11,0,0,36,41,13,14,0,0,32,43,8,0,6,42,4,6,0,35,2,2,0,0,7,0,1,1,0,7,2,3,0,0,0,0,3,1,0,0,0,0,0,0,44,33,35,0,0,6,22,1,34,1,29,26,8,29,0,1,22,32,10,0,18,9,2,2,0,7,0,1,2,0,3,0,1,0,0,0,1,4,0,0,0,0,2,0,0,34,35,41,0,0,1,14,6,28,0,13,28,42,14,0,40,36,41,10,0,12,2,8,3,0,8,2,2,0,0,3,1,0,0,0,0,3,0,0,0,0,2,0,0,0,1,5,30,1,0,21,6,35,36,1,35,28,11,22,2,43,22,26,11,0,3,6,17,7,0,2,2,1,2,0,3,3,0,0,0,0,2,0,0,0,0,0,1,0,0,37,17,12,0,0,4,33,34,9,0,31,43,33,22,0,33,22,34,6,0,11,17,6,4,0,9,4,1,0,0,3,2,1,0,0,0,0,0,1,0,0,0,0,0,0,35,20,3,0,0,10,15,17,2,0,12,22,11,7,0,11,16,11,4,0,17,8,9,1,0,9,7,1,0,0,4,1,0,0,0,0,0,0,0,0,1,0,0,0,0,3,0,1,0,0,1,4,2,1,0,5,2,4,0,0,6,9,2,1,0,6,9,3,0,0,4,10,1,0,0,7,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,2,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,5,0,1,0,0,44,7,6,2,0,19,2,6,4,1,29,1,1,1,0,23,0,1,1,0,11,0,3,0,0,6,0,0,1,0,0,0,0,2,0,0,0,0,0,0,7,21,2,0,0,41,26,22,12,0,35,39,12,16,1,13,33,9,4,0,26,22,11,0,0,35,2,0,0,0,27,2,2,0,0,2,0,0,2,0,0,0,1,0,0,30,33,5,0,0,24,41,36,12,0,2,29,32,13,2,1,40,16,15,0,4,32,11,1,0,26,7,2,0,0,17,10,0,0,0,4,3,5,1,0,0,0,0,0,0,29,12,16,1,0,42,7,8,32,0,15,29,28,27,0,31,21,40,10,0,16,20,14,4,0,4,6,4,4,0,5,3,5,1,0,0,2,5,0,0,2,0,1,0,0,43,21,6,0,0,34,0,28,4,0,14,25,20,16,1,35,0,43,12,0,12,13,25,3,0,5,5,4,0,0,1,1,4,0,0,0,0,0,0,0,0,0,0,0,0,19,41,11,0,0,4,44,32,17,1,38,16,29,22,2,20,35,26,6,0,17,31,11,1,0,15,6,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,12,1,0,0,18,20,8,1,0,15,17,13,4,1,12,17,6,0,0,15,13,9,1,0,13,5,1,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,4,2,0,0,0,3,5,4,1,1,6,3,9,1,0,9,9,2,1,0,8,15,5,0,0,5,8,5,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,9,0,0,1,0,21,0,0,0,0,15,0,0,0,0,21,0,1,3,0,21,1,2,0,0,9,0,0,1,0,0,0,2,0,0,0,0,0,0,0,25,2,0,0,0,31,7,1,1,0,7,20,3,2,0,43,10,1,2,1,18,14,6,8,0,16,10,7,5,0,14,2,2,3,0,10,0,4,1,1,2,0,1,0,0,4,37,0,0,0,43,7,22,4,3,26,12,27,5,0,39,8,17,6,1,19,35,16,6,0,39,43,21,2,0,39,18,8,2,0,14,0,3,0,0,5,0,1,2,0,16,0,1,0,0,42,29,43,17,0,34,17,44,10,0,4,19,32,3,0,21,17,36,10,0,36,27,8,2,0,19,9,2,3,0,5,1,3,0,0,0,0,0,0,0,13,18,2,0,0,26,7,34,5,1,17,39,37,4,0,44,14,44,11,1,42,37,19,5,0,13,27,8,4,0,7,5,4,0,0,3,1,3,1,0,0,0,0,0,0,11,18,1,0,0,20,9,20,3,1,34,26,28,17,0,44,31,19,5,0,15,28,13,2,0,23,20,8,1,0,4,2,1,0,0,0,0,0,0,0,0,0,0,0,0,28,14,2,0,0,22,27,7,6,0,17,14,14,14,0,15,13,15,4,0,19,7,9,0,0,8,6,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,4,5,7,0,0,4,6,11,0,0,8,7,4,1,0,6,12,6,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,43,0,0,0,0,16,2,1,0,0,35,2,1,0,0,37,4,0,3,0,21,3,0,0,0,11,2,0,0,0,3,0,0,0,0,0,0,0,0,0,26,0,0,0,0,30,8,1,0,0,43,16,2,1,0,41,35,3,3,0,35,18,4,1,0,6,25,5,3,0,38,12,0,0,0,26,3,0,0,0,1,0,0,0,0,42,1,0,0,0,42,33,2,0,0,44,37,19,2,0,18,30,21,4,0,41,42,14,0,0,41,0,6,1,0,37,4,7,0,0,4,2,0,1,0,0,0,0,0,0,18,2,0,0,0,42,8,7,2,0,27,37,23,6,1,19,43,2,2,0,15,33,26,3,0,27,19,7,4,0,3,13,3,3,0,0,0,0,0,0,0,0,0,0,0,39,2,0,0,0,20,23,5,2,0,32,24,14,3,0,22,15,8,4,0,19,16,9,4,0,14,8,3,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,6,3,0,0,0,8,15,1,0,0,12,10,11,9,0,8,13,5,1,0,7,7,5,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,3,3,2,0,0,2,7,5,0,0,5,6,4,1,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"training":{"seed":42,"episodes":7000,"max_steps_per_episode":240,"gamma":0.985,"learning_rate":0.16,"training_perturbations":"random impulses, low-amplitude forcing, wider initial states, randomized plant coefficients"},"disclaimer":"The policy is trained only on a synthetic low-order toy plant. It is not trained on tokamak data and is not suitable for control of physical equipment."};
+const REFERENCE = {
+  "method": "Paired-seed, held-out synthetic disturbance profiles",
+  "seeds_per_profile": 12,
+  "profiles": {
+    "unseen_doublet": {
+      "label": "Double pulses",
+      "rl": {
+        "survival": 0.7466666666666667,
+        "mean_risk": 0.2119422532375217,
+        "high_risk_fraction": 0.04870468738280282,
+        "peak_risk": 0.6639557336749647,
+        "mean_reward": -0.5867938831910592,
+        "recovery_steps": 36.5,
+        "early_termination_rate": 0.75
+      },
+      "guarded": {
+        "survival": 1.0,
+        "mean_risk": 0.13638327583309748,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.38369011937215153,
+        "mean_reward": -0.17816887105467039,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "feedback": {
+        "survival": 1.0,
+        "mean_risk": 0.1021439079246047,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.2682732342188507,
+        "mean_reward": -0.06108438509817987,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "open": {
+        "survival": 0.4040000000000001,
+        "mean_risk": 0.3708279551576679,
+        "high_risk_fraction": 0.24798844994795025,
+        "peak_risk": 0.8776758404327775,
+        "mean_reward": -1.0442952762381903,
+        "recovery_steps": null,
+        "early_termination_rate": 1.0
+      }
+    },
+    "unseen_sustained": {
+      "label": "Sustained forcing",
+      "rl": {
+        "survival": 1.0,
+        "mean_risk": 0.059816721729308776,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.11770295425447164,
+        "mean_reward": -0.0397237225692266,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "guarded": {
+        "survival": 1.0,
+        "mean_risk": 0.059816721729308776,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.11770295425447164,
+        "mean_reward": -0.0397237225692266,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "feedback": {
+        "survival": 1.0,
+        "mean_risk": 0.04722770360140452,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.12590501655975728,
+        "mean_reward": -0.012293943466318047,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "open": {
+        "survival": 0.8143333333333334,
+        "mean_risk": 0.2969153035861262,
+        "high_risk_fraction": 0.15041455141330443,
+        "peak_risk": 0.9134997354798097,
+        "mean_reward": -0.6310920926983754,
+        "recovery_steps": null,
+        "early_termination_rate": 0.75
+      }
+    },
+    "unseen_ramp": {
+      "label": "Rising disturbance",
+      "rl": {
+        "survival": 0.9713333333333333,
+        "mean_risk": 0.07809955695460329,
+        "high_risk_fraction": 0.009485071301247773,
+        "peak_risk": 0.3364064419724297,
+        "mean_reward": -0.10128479349813259,
+        "recovery_steps": null,
+        "early_termination_rate": 0.16666666666666666
+      },
+      "guarded": {
+        "survival": 1.0,
+        "mean_risk": 0.07810672382867385,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.25045455876787004,
+        "mean_reward": -0.07558032947085186,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "feedback": {
+        "survival": 1.0,
+        "mean_risk": 0.06109988651673754,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.17360682383357895,
+        "mean_reward": -0.021118742874470978,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "open": {
+        "survival": 0.6283333333333334,
+        "mean_risk": 0.35698681046263053,
+        "high_risk_fraction": 0.18030223322822894,
+        "peak_risk": 0.8640136395910457,
+        "mean_reward": -0.8533930683684359,
+        "recovery_steps": null,
+        "early_termination_rate": 1.0
+      }
+    },
+    "unseen_cluster": {
+      "label": "Pulse clusters",
+      "rl": {
+        "survival": 0.5943333333333334,
+        "mean_risk": 0.23000459205243964,
+        "high_risk_fraction": 0.10449160069027545,
+        "peak_risk": 0.8084861595206211,
+        "mean_reward": -0.7049451745196831,
+        "recovery_steps": 36.0,
+        "early_termination_rate": 0.9166666666666666
+      },
+      "guarded": {
+        "survival": 1.0,
+        "mean_risk": 0.1414632787485337,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.3855330121164142,
+        "mean_reward": -0.17430080673238516,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "feedback": {
+        "survival": 1.0,
+        "mean_risk": 0.1259610174711003,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.31989455763529995,
+        "mean_reward": -0.09442267566128894,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "open": {
+        "survival": 0.28366666666666673,
+        "mean_risk": 0.3617083337251971,
+        "high_risk_fraction": 0.2697667609905725,
+        "peak_risk": 0.9016140925865496,
+        "mean_reward": -1.0878425851447195,
+        "recovery_steps": null,
+        "early_termination_rate": 1.0
+      }
+    },
+    "unseen_parameter_shift": {
+      "label": "Plant parameter shift",
+      "rl": {
+        "survival": 0.7863333333333333,
+        "mean_risk": 0.13667067185076595,
+        "high_risk_fraction": 0.04755052985467151,
+        "peak_risk": 0.5027218830839288,
+        "mean_reward": -0.33168837815383684,
+        "recovery_steps": 31.0,
+        "early_termination_rate": 0.4166666666666667
+      },
+      "guarded": {
+        "survival": 1.0,
+        "mean_risk": 0.10499558916350243,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.28237620514623474,
+        "mean_reward": -0.10864523264371172,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "feedback": {
+        "survival": 1.0,
+        "mean_risk": 0.09520514354756403,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.19735767245130045,
+        "mean_reward": -0.048504256265359334,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "open": {
+        "survival": 0.365,
+        "mean_risk": 0.3908440802267256,
+        "high_risk_fraction": 0.32420043522226694,
+        "peak_risk": 0.9389572959297547,
+        "mean_reward": -1.0387082620863162,
+        "recovery_steps": null,
+        "early_termination_rate": 1.0
+      }
+    },
+    "unseen_noisy_sensors": {
+      "label": "Noisier sensors",
+      "rl": {
+        "survival": 0.9346666666666668,
+        "mean_risk": 0.08679897420459869,
+        "high_risk_fraction": 0.012296723560232972,
+        "peak_risk": 0.33548481191728713,
+        "mean_reward": -0.14306883022366454,
+        "recovery_steps": null,
+        "early_termination_rate": 0.16666666666666666
+      },
+      "guarded": {
+        "survival": 1.0,
+        "mean_risk": 0.0759225737283832,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.2462382555675282,
+        "mean_reward": -0.07077282321316247,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "feedback": {
+        "survival": 1.0,
+        "mean_risk": 0.053349974297889846,
+        "high_risk_fraction": 0.0,
+        "peak_risk": 0.1616465959754609,
+        "mean_reward": -0.01768255878241229,
+        "recovery_steps": null,
+        "early_termination_rate": 0.0
+      },
+      "open": {
+        "survival": 0.5703333333333332,
+        "mean_risk": 0.3327619775514354,
+        "high_risk_fraction": 0.17279721579002436,
+        "peak_risk": 0.897122336552321,
+        "mean_reward": -0.7842292292299602,
+        "recovery_steps": null,
+        "early_termination_rate": 1.0
+      }
+    }
+  },
+  "overall": {
+    "rl": {
+      "survival": 0.8388888888888889,
+      "mean_risk": 0.13388879500487302,
+      "high_risk_fraction": 0.037088102131538424,
+      "peak_risk": 0.4607929974039506,
+      "mean_reward": -0.3179174636926005,
+      "early_termination_rate": 0.40277777777777773
+    },
+    "guarded": {
+      "survival": 1.0,
+      "mean_risk": 0.09944802717191657,
+      "high_risk_fraction": 0.0,
+      "peak_risk": 0.27766585087077844,
+      "mean_reward": -0.10786529761400136,
+      "early_termination_rate": 0.0
+    },
+    "feedback": {
+      "survival": 1.0,
+      "mean_risk": 0.08083127222655016,
+      "high_risk_fraction": 0.0,
+      "peak_risk": 0.2077806501123747,
+      "mean_reward": -0.04251776035800491,
+      "early_termination_rate": 0.0
+    },
+    "open": {
+      "survival": 0.5109444444444445,
+      "mean_risk": 0.3516740767849638,
+      "high_risk_fraction": 0.2242449410987246,
+      "peak_risk": 0.8988138234287096,
+      "mean_reward": -0.9065934189609995,
+      "early_termination_rate": 0.9583333333333334
+    }
+  },
+  "note": "Results describe only this simplified synthetic environment. They are not evidence of tokamak control performance."
+};
+const $ = id => document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fmt=(v,d=2)=>Number(v).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtTime=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+const bins=[MODEL.bins.x,MODEL.bins.v,MODEL.bins.instability,MODEL.bins.disturbance];
+const shape=MODEL.shape, actions=MODEL.actions, policy=MODEL.policy;
+let running=false, mode='guarded', profile='manual', simTime=0, stepCount=0, profileStart=0, disturbance=0, disturbanceTimer=0, elapsedLowRisk=0, action=[0,0];
+let state={x:.05,v:0,i:.14,dist:0}, currentObs=[.05,0,.14,0], history=[], events=[], lastRisk=.12, wasElevated=false, lastFrame=0, accumulator=0, rngLive=Math.random;
+const canvas=$('plasmaCanvas'), pctx=canvas.getContext('2d'), chart=$('historyCanvas'), hctx=chart.getContext('2d');
+function nearest(grid,v){let at=0,dist=Infinity;for(let i=0;i<grid.length;i++){const d=Math.abs(grid[i]-v);if(d<dist){dist=d;at=i;}}return at;}
+function policyAction(obs){const ix=nearest(bins[0],obs[0]),iv=nearest(bins[1],obs[1]),ii=nearest(bins[2],obs[2]),id=nearest(bins[3],obs[3]);const flat=(((ix*shape[1]+iv)*shape[2]+ii)*shape[3]+id);return actions[policy[flat]??0];}
+function feedbackAction(obs){const [x,v,i,d]=obs;const m=clamp(1.72*x+1.05*v,-1,1), damp=clamp(.56*i+.24*Math.abs(x)+.22*d+.08*Math.abs(v),0,1);let best=0,dist=Infinity;for(let j=0;j<actions.length;j++){const e=(actions[j][0]-m)**2+(actions[j][1]-damp)**2;if(e<dist){dist=e;best=j;}}return actions[best];}
+function estimateRisk(s){return clamp(.46*s.i+.31*Math.abs(s.x)+.23*Math.abs(s.v),0,1);}
+function observe(s,noise=.009,random=Math.random){return [clamp(s.x+normal(random)*noise,-1.4,1.4),clamp(s.v+normal(random)*noise*1.5,-1.25,1.25),clamp(s.i+normal(random)*noise,.025,1.25),clamp(s.dist+normal(random)*noise,0,1)];}
+function normal(random){const a=Math.max(1e-9,random()),b=random();return Math.sqrt(-2*Math.log(a))*Math.cos(2*Math.PI*b);}
+function chooseAction(obs,selectedMode){if(selectedMode==='off')return [0,0];if(selectedMode==='feedback')return feedbackAction(obs);const learned=policyAction(obs);if(selectedMode==='rl')return learned;const risk=clamp(.46*obs[2]+.31*Math.abs(obs[0])+.23*Math.abs(obs[1]),0,1);const outside=Math.abs(obs[0])>1||Math.abs(obs[1])>1||obs[2]>.82||obs[3]>.9;return risk>.30||outside?feedbackAction(obs):learned;}
+function logEvent(title,description,level=''){const row={t:simTime,title,description,level};events.unshift(row);if(events.length>30)events.pop();renderLog();}
+function renderLog(){const el=$('eventLog');el.innerHTML=events.length?events.map(e=>`<div class="event ${e.level}"><div class="event-time">${fmtTime(e.t)}</div><div><strong>${escapeHTML(e.title)}</strong><p>${escapeHTML(e.description)}</p></div></div>`).join(''):'<div class="empty">Nenhum evento registrado.</div>';}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function inject(amp=Number($('disturbanceLevel').value)/100,addLog=true){const sign=Math.random()<.5?-1:1;state.dist=Math.max(state.dist,amp);disturbanceTimer=1.2+Math.random()*.6;state.v=clamp(state.v+sign*amp*.36,-1.25,1.25);state.i=clamp(state.i+amp*.18,.025,1.25);if(addLog)logEvent('Perturbação injetada',`Amplitude ${Math.round(amp*100)}%; o agente deve recuperar o estado sem alterar o modelo de referência.`,amp>.7?'warn':'');}
+function applyScheduledDisturbance(env, profileKey, k, random){let force=0;const doInject=(a)=>envInject(env,a,random);
+  if(profileKey==='manual'){if(k%60===0&&random()<.24)doInject(.12+random()*.25);}
+  else if(profileKey==='unseen_doublet'){if([32,39,104,112,186,194].includes(k))doInject(.58+random()*.42);}
+  else if(profileKey==='unseen_sustained'){if(k>25&&k<125)force+=.17*Math.sin(env.t*1.7);if(k>155&&k<235)force+=.11*Math.sin(env.t*.55);if(k===25||k===155)doInject(.42);}
+  else if(profileKey==='unseen_ramp'){const a=k>30&&k<145?.12+.8*clamp((k-30)/100,0,1):0;force=a*.34*Math.sin(env.t*1.2);if(k===30||k===145||k===215)doInject(k===215?.93:.55);}
+  else if(profileKey==='unseen_cluster'){const list=[[26,.76],[32,.91],[41,.72],[116,.83],[124,.92],[133,.79],[202,.98]];for(const [t,a] of list)if(k===t)doInject(a);}
+  else if(profileKey==='unseen_parameter_shift'){if([32,115,195].includes(k))doInject(.55+random()*.37);force=.11*Math.sin(env.t*2);env.ax=1.32;env.dampGain=.72;env.growthGain=1.2;env.noiseGain=1.8;}
+  else if(profileKey==='unseen_noisy_sensors'){if([35,92,153,220].includes(k))doInject(.45+random()*.47);}
+  return force;
+}
+function envInject(env,amp,random){const sign=random()<.5?-1:1;env.dist=Math.max(env.dist,amp);if('distT' in env)env.distT=.4+random()*1.4;else env.disturbanceTimer=.4+random()*1.4;env.v=clamp(env.v+sign*amp*.36,-1.25,1.25);env.i=clamp(env.i+amp*.18,.025,1.25);}
+function advance(dt=.1,log=true){simTime+=dt;stepCount++;let force=0;const k=stepCount-profileStart;
+  force=applyScheduledDisturbance(state,profile,k,Math.random);
+  if(disturbanceTimer>0){disturbanceTimer-=dt;state.dist*=Math.exp(-.8*dt);}else state.dist*=Math.exp(-1.28*dt);
+  if(profile==='unseen_parameter_shift'){state.ax=1.32;state.dampGain=.72;state.growthGain=1.2;state.noiseGain=1.8;}else{state.ax=1;state.dampGain=1;state.growthGain=1;state.noiseGain=1;}
+  const noisy=observe(state,profile==='unseen_noisy_sensors'?.05:.009);
+  currentObs=noisy;action=chooseAction(noisy,mode);
+  const [mag,damp]=action;
+  const ax=state.ax||1,dampGain=state.dampGain||1,growthGain=state.growthGain||1,noiseGain=state.noiseGain||1;
+  const ambient=.022*Math.sin(simTime*1.17)+.014*Math.sin(simTime*2.63),stochastic=(Math.random()*0.036-.018)*(.3+state.i)*noiseGain;
+  const accel=.68*ax*state.i*Math.sin(simTime*1.4+state.x*2)+ambient+stochastic+force-1.28*mag-.58*state.v;
+  state.v=clamp(state.v+accel*dt,-1.3,1.3);state.x=clamp(state.x+state.v*dt,-1.45,1.45);
+  const growth=growthGain*(.18*Math.abs(state.x)+.12*Math.abs(state.v)+.14*state.dist)+.012*Math.abs(Math.sin(simTime*2.2)),damping=.48*dampGain*damp+.035;
+  state.i=clamp(state.i+(growth-damping)*dt,.025,1.3);if(Math.abs(state.x)>1.12||state.i>1.05)state.i=clamp(state.i+.18*dt,0,1.3);
+  const risk=estimateRisk(state);if(risk<.30)elapsedLowRisk+=dt;
+  if(risk>.55&&!wasElevated){wasElevated=true;if(log)logEvent('Risco elevado',`O índice estimado subiu para ${Math.round(risk*100)}%.`, 'warn');}
+  if(risk<.30&&wasElevated){wasElevated=false;if(log)logEvent('Estado recuperado',`O índice voltou abaixo de 30% após uma perturbação.`, '');}
+  if(stepCount%2===0){history.push({t:simTime,x:state.x,i:state.i,risk});if(history.length>140)history.shift();}
+  lastRisk=risk;if(Math.abs(state.x)>1.39||state.i>1.24||risk>.96){running=false;if(log)logEvent('Limite do modelo atingido','O episódio foi encerrado pelo critério sintético de instabilidade.','bad');}
+}
+function resetSimulation(){running=false;simTime=0;stepCount=0;profileStart=0;disturbance=0;disturbanceTimer=0;elapsedLowRisk=0;accumulator=0;state={x:.05,v:0,i:.14,dist:0,ax:1,dampGain:1,growthGain:1,noiseGain:1};currentObs=[.05,0,.14,0];history=[];events=[];wasElevated=false;action=[0,0];lastRisk=estimateRisk(state);renderLog();logEvent('Ambiente reiniciado','Estado inicial restaurado; contadores zerados.');updateUI();draw();}
+function setProfile(v){profile=v;profileStart=stepCount;$('profileCaption').textContent='Perfil ativo: '+profileLabel(v);if(profile!=='manual')logEvent('Perfil alterado',`O ensaio agora usa: ${profileLabel(v)}.`);}
+function profileLabel(v){return ({manual:'teste manual',unseen_doublet:'pulsos duplos',unseen_sustained:'forçamento sustentado',unseen_ramp:'rampa crescente',unseen_cluster:'pulsos agrupados',unseen_parameter_shift:'parâmetros alterados',unseen_noisy_sensors:'sensores mais ruidosos'})[v]||v;}
+function modeLabel(v){return ({rl:'RL puro',guarded:'RL + fallback',feedback:'feedback convencional',off:'sem correção'})[v]||v;}
+function updateUI(){const risk=estimateRisk(state);$('clock').textContent=`t + ${fmt(simTime,1)} s`;$('metricRisk').textContent=Math.round(risk*100)+'%';$('metricRisk').style.color=risk>.55?'var(--red)':risk>.3?'var(--amber)':'var(--green)';$('metricX').textContent=fmt(state.x);$('metricI').textContent=fmt(state.i);$('metricStable').textContent=fmtTime(elapsedLowRisk);$('obsX').textContent=fmt(currentObs[0]);$('obsV').textContent=fmt(currentObs[1]);$('obsI').textContent=fmt(currentObs[2]);$('obsD').textContent=fmt(currentObs[3]);$('barX').style.width=Math.min(100,Math.abs(currentObs[0])/1.3*100)+'%';$('barV').style.width=Math.min(100,Math.abs(currentObs[1])/1.25*100)+'%';$('barI').style.width=Math.min(100,currentObs[2]/1.25*100)+'%';$('barD').style.width=Math.min(100,currentObs[3]*100)+'%';
+  $('magValue').textContent=(action[0]>=0?'+':'')+fmt(action[0]);$('dampValue').textContent=fmt(action[1]);$('magFill').style.width=Math.abs(action[0])*100+'%';$('magFill').style.transform=action[0]<0?'scaleX(-1)':'';$('dampFill').style.width=action[1]*100+'%';$('actionSource').textContent=modeLabel(mode);$('agentStatus').textContent=mode==='off'?'Desligado':'Ativo';$('controlCaption').textContent='Controle: '+modeLabel(mode);
+  const status=$('liveState');status.textContent=risk<.30?'ESTÁVEL':risk<.55?'PERTURBADO':'ALTO RISCO';status.className='state-pill'+(risk>=.55?' bad':risk>=.30?' warn':'');
+  let title='Estado dentro da faixa de baixo risco',body='O agente está observando a resposta do modelo. Uma perturbação pode ser injetada para testar a recuperação.';if(mode==='off'){title='Nenhuma correção aplicada';body='O sistema evolui apenas sob a dinâmica sintética e as perturbações configuradas.';}else if(mode==='feedback'){title='Controlador convencional ativo';body='A ação é calculada a partir de deslocamento, velocidade, instabilidade e carga de perturbação.';}else if(mode==='rl'){title='Ação selecionada pela política aprendida';body='A observação é discretizada e mapeada para uma das ações armazenadas na política Q-learning. A política pura pode falhar fora da distribuição de treino.';}else if(clamp(.46*currentObs[2]+.31*Math.abs(currentObs[0])+.23*Math.abs(currentObs[1]),0,1)>.30||Math.abs(currentObs[0])>1||Math.abs(currentObs[1])>1||currentObs[2]>.82||currentObs[3]>.9){title='Fallback de feedback acionado';body='A condição observada excedeu o limiar de guarda; a ação agora vem do controlador convencional de referência.';}else{title='Política RL operando';body='O estado permanece dentro da região permitida e a ação vem da política aprendida.';}$('decisionBox').innerHTML='<strong>'+escapeHTML(title)+'</strong>'+escapeHTML(body);
+  $('runBtn').textContent=running?'Pausar simulação':'Iniciar simulação';$('runBtn').classList.toggle('primary',!running);
+}
+function resizeCanvas(c,ctx,h){const dpr=Math.min(window.devicePixelRatio||1,2),r=c.getBoundingClientRect();c.width=Math.max(1,Math.floor(r.width*dpr));c.height=Math.max(1,Math.floor(h*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);return {w:r.width,h};}
+let stageSize={w:0,h:0},chartSize={w:0,h:0};function resize(){stageSize=resizeCanvas(canvas,pctx,335);chartSize=resizeCanvas(chart,hctx,180);draw();}
+function drawPlasma(){const {w,h}=stageSize;if(!w||!h)return;const c=pctx;c.clearRect(0,0,w,h);c.fillStyle='#172733';c.fillRect(0,0,w,h);c.strokeStyle='#ffffff0b';c.lineWidth=1;for(let x=0;x<w;x+=38){c.beginPath();c.moveTo(x,0);c.lineTo(x,h);c.stroke();}for(let y=0;y<h;y+=38){c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}
+  const cx=w*.5+state.x*Math.min(w*.11,70),cy=h*.52,rx=Math.min(w*.25,205),ry=Math.min(h*.28,92),risk=estimateRisk(state);c.save();c.translate(w*.5,cy+5);c.scale(1,.65);c.strokeStyle='#8096a477';c.lineWidth=24;c.beginPath();c.ellipse(0,0,rx*1.34,ry*1.42,0,0,Math.PI*2);c.stroke();c.strokeStyle='#c6d4dc55';c.lineWidth=1.5;c.beginPath();c.ellipse(0,0,rx*1.34,ry*1.42,0,0,Math.PI*2);c.stroke();c.restore();
+  for(let j=0;j<14;j++){const a=j*Math.PI*2/14,x=w*.5+Math.cos(a)*rx*1.36,y=cy+5+Math.sin(a)*ry*1.08;c.strokeStyle='#7d9eb27a';c.lineWidth=2;c.beginPath();c.ellipse(x,y,7,11,a,0,Math.PI*2);c.stroke();}
+  c.strokeStyle='#7da6bf40';c.lineWidth=1;for(let j=0;j<5;j++){c.beginPath();c.ellipse(w*.5,cy,(rx*.76+j*rx*.045),(ry*.72+j*ry*.045),0,0,Math.PI*2);c.stroke();}
+  const ring=(offset,color,width,alpha)=>{c.beginPath();for(let i=0;i<=180;i++){const a=i/180*Math.PI*2,wiggle=state.i*(.045*Math.sin(2*a+simTime*2.1)+.018*Math.sin(5*a-simTime*1.4));const x=w*.5+Math.cos(a)*rx*(1+offset+wiggle)+state.x*rx*.12,y=cy+Math.sin(a)*ry*(1+offset+wiggle*1.5);if(!i)c.moveTo(x,y);else c.lineTo(x,y);}c.closePath();c.strokeStyle=color;c.globalAlpha=alpha;c.lineWidth=width;c.stroke();c.globalAlpha=1;};
+  const color=risk<.3?'#80c7bf':risk<.55?'#d3a15c':'#cf7478';ring(0,color,5,.92);ring(-.05,'#d9e9ef',1.5,.85);ring(.055,'#85a8be',1.2,.8);if(state.dist>.08){c.strokeStyle='#dfaa61aa';c.lineWidth=1.4;c.setLineDash([5,6]);c.beginPath();c.ellipse(cx,cy,rx*(1.05+state.dist*.15),ry*(1.05+state.dist*.15),0,0,Math.PI*2);c.stroke();c.setLineDash([]);}c.fillStyle='#c1d0d9';c.font='10px ui-monospace,monospace';c.textAlign='center';c.fillText('PLASMA / NORMALIZED MODEL',w*.5,h-18);c.textAlign='left';}
+function drawChart(){const {w,h}=chartSize;if(!w||!h)return;const c=hctx;c.clearRect(0,0,w,h);c.fillStyle='#fff';c.fillRect(0,0,w,h);const l=35,r=8,t=10,b=22,pw=w-l-r,ph=h-t-b;c.font='10px ui-monospace,monospace';c.textAlign='right';for(let i=0;i<=4;i++){const y=t+ph*i/4;c.strokeStyle='#e4e9ed';c.beginPath();c.moveTo(l,y);c.lineTo(w-r,y);c.stroke();c.fillStyle='#7d8994';c.fillText((1-i*.25).toFixed(2),l-7,y+3);}if(history.length<2){c.textAlign='center';c.fillStyle='#82909b';c.fillText('Inicie a simulação para coletar pontos',l+pw/2,t+ph/2);return;}const series=(key,color)=>{c.beginPath();history.forEach((d,i)=>{const v=key==='x'?Math.abs(d.x)/1.3:d.i/1.25,x=l+i/(history.length-1)*pw,y=t+ph*(1-clamp(v,0,1));if(i===0)c.moveTo(x,y);else c.lineTo(x,y);});c.strokeStyle=color;c.lineWidth=1.8;c.stroke();};series('x','#28628a');series('i','#d08a37');c.textAlign='left';c.fillStyle='#7d8994';c.fillText('amostra recente',l,h-5);}
+function draw(){drawPlasma();drawChart();}
+function frame(now){if(!lastFrame)lastFrame=now;const elapsed=Math.min((now-lastFrame)/1000,.05);lastFrame=now;if(running){accumulator+=elapsed;while(accumulator>=.1&&running){advance(.1);accumulator-=.1;}updateUI();}draw();requestAnimationFrame(frame);}
+
+// Deterministic benchmark, separate from the live simulation's random stream.
+function seeded(seed){let a=seed>>>0;return ()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
+function runTrial(testProfile,testMode,seed,steps=250){const random=seeded(seed),env={t:0,k:0,x:(random()*.24-.12),v:(random()*.16-.08),i:.06+random()*.16,dist:0,distT:0,ax:.82+random()*.38,dampGain:.82+random()*.38,growthGain:.82+random()*.38,noiseGain:.65+random()*.85};if(testProfile==='unseen_parameter_shift'){env.ax=1;env.dampGain=1;env.growthGain=1;env.noiseGain=1;}let risks=[],high=0,early=false;
+  for(let k=1;k<=steps;k++){env.k=k;env.t+=.1;let force=applyScheduledDisturbance(env,testProfile,k,random);if(env.distT>0){env.distT-=.1;env.dist*=Math.exp(-.8*.1);}else env.dist*=Math.exp(-1.28*.1);if(testProfile==='unseen_parameter_shift'){env.ax=1.32;env.dampGain=.72;env.growthGain=1.2;env.noiseGain=1.8;}
+    const noise=testProfile==='unseen_noisy_sensors'?.05:.009,obs=[clamp(env.x+normal(random)*noise,-1.4,1.4),clamp(env.v+normal(random)*noise*1.5,-1.25,1.25),clamp(env.i+normal(random)*noise,.025,1.25),clamp(env.dist+normal(random)*noise,0,1)];const act=chooseAction(obs,testMode),[mag,damp]=act,ambient=.022*Math.sin(env.t*1.17)+.014*Math.sin(env.t*2.63),stochastic=(random()*.036-.018)*(.3+env.i)*env.noiseGain,accel=.68*env.ax*env.i*Math.sin(env.t*1.4+env.x*2)+ambient+stochastic+force-1.28*mag-.58*env.v;
+    env.v=clamp(env.v+accel*.1,-1.3,1.3);env.x=clamp(env.x+env.v*.1,-1.45,1.45);const growth=env.growthGain*(.18*Math.abs(env.x)+.12*Math.abs(env.v)+.14*env.dist)+.012*Math.abs(Math.sin(env.t*2.2)),damping=.48*env.dampGain*damp+.035;env.i=clamp(env.i+(growth-damping)*.1,.025,1.3);if(Math.abs(env.x)>1.12||env.i>1.05)env.i=clamp(env.i+.018,0,1.3);const risk=clamp(.46*env.i+.31*Math.abs(env.x)+.23*Math.abs(env.v),0,1);risks.push(risk);if(risk>.55)high++;if(Math.abs(env.x)>1.39||env.i>1.24||risk>.96){early=true;break;}}
+  return {survival:risks.length/steps,meanRisk:risks.reduce((a,b)=>a+b,0)/risks.length,highRisk:high/risks.length,early};}
+function runBenchmark(){const btn=$('benchBtn');btn.disabled=true;btn.textContent='Executando…';$('benchProgress').style.width='20%';$('benchStatus').textContent='Calculando execuções pareadas';setTimeout(()=>{const profiles=['unseen_doublet','unseen_sustained','unseen_ramp','unseen_cluster','unseen_parameter_shift','unseen_noisy_sensors'];const names={'unseen_doublet':'Pulsos duplos','unseen_sustained':'Forçamento sustentado','unseen_ramp':'Rampa crescente','unseen_cluster':'Pulsos agrupados','unseen_parameter_shift':'Parâmetros alterados','unseen_noisy_sensors':'Sensores mais ruidosos'};const modes=['rl','guarded','feedback','off'],results={};let done=0,total=profiles.length*modes.length*12;
+    for(const p of profiles){results[p]={};for(const m of modes){const vals=[];for(let j=0;j<12;j++){vals.push(runTrial(p,m,5000+j));done++;}results[p][m]={survival:vals.reduce((a,v)=>a+v.survival,0)/vals.length,meanRisk:vals.reduce((a,v)=>a+v.meanRisk,0)/vals.length,highRisk:vals.reduce((a,v)=>a+v.highRisk,0)/vals.length,early:vals.filter(v=>v.early).length/vals.length};}}
+    renderBenchmark(results,names);$('benchProgress').style.width='100%';$('benchStatus').textContent=`Concluído · ${total} execuções`;$('benchNote').textContent='Benchmark recalculado localmente com 12 sementes por perfil e por modo. Sobrevivência = fração média de passos concluídos antes do limite sintético; risco médio = média do índice durante o episódio. Resultados específicos deste simulador, não de um reator real.';btn.disabled=false;btn.textContent='Executar novamente';},20);}
+function renderBenchmark(results,names){const body=$('benchBody');const modes=['rl','guarded','feedback','off'];const labels={rl:'RL puro',guarded:'RL + fallback',feedback:'Feedback',off:'Sem controle'};let totals={};for(const m of modes)totals[m]={survival:0,meanRisk:0,highRisk:0,early:0,count:0};let html='';for(const [p,name] of Object.entries(names)){html+=`<tr><td><div class="scenario-name">${name}</div><div class="scenario-sub">Perfil fora do treino</div></td>`;for(const m of modes){const r=results[p][m];for(const k of ['survival','meanRisk','highRisk','early'])totals[m][k]+=r[k];totals[m].count++;const cls=r.survival>.95&&r.meanRisk<.12?'good':r.survival<.8||r.meanRisk>.25?'bad':'mixed';html+=`<td><span class="cell-main ${cls}">${Math.round(r.survival*100)}% do ensaio</span><span class="cell-sub">risco ${Math.round(r.meanRisk*100)}% · alto risco ${Math.round(r.highRisk*100)}%</span></td>`;}html+='</tr>';}
+  html+='<tr><td><div class="scenario-name">Média dos seis perfis</div><div class="scenario-sub">Resumo geral do benchmark</div></td>';for(const m of modes){const r=totals[m],survival=r.survival/r.count,meanRisk=r.meanRisk/r.count,highRisk=r.highRisk/r.count,cls=survival>.95&&meanRisk<.12?'good':survival<.8||meanRisk>.25?'bad':'mixed';html+=`<td><span class="cell-main ${cls}">${Math.round(survival*100)}% do ensaio</span><span class="cell-sub">risco ${Math.round(meanRisk*100)}% · alto risco ${Math.round(highRisk*100)}%</span></td>`;}html+='</tr>';body.innerHTML=html;}
+function loadReferenceBenchmark(){const profiles=REFERENCE.profiles;const results={};for(const [key,value] of Object.entries(profiles)){results[key]={rl:{survival:value.rl.survival,meanRisk:value.rl.mean_risk,highRisk:value.rl.high_risk_fraction},guarded:{survival:value.guarded.survival,meanRisk:value.guarded.mean_risk,highRisk:value.guarded.high_risk_fraction},feedback:{survival:value.feedback.survival,meanRisk:value.feedback.mean_risk,highRisk:value.feedback.high_risk_fraction},off:{survival:value.open.survival,meanRisk:value.open.mean_risk,highRisk:value.open.high_risk_fraction}};}const names={};for(const [key,value] of Object.entries(profiles))names[key]=value.label;renderBenchmark(results,names);}
+$('runBtn').addEventListener('click',()=>{running=!running;if(running)logEvent('Simulação iniciada',`Modo ${modeLabel(mode)}; perfil ${profileLabel(profile)}.`);else logEvent('Simulação pausada','O estado e o controlador foram pausados.');updateUI();});
+$('injectBtn').addEventListener('click',()=>inject(Number($('disturbanceLevel').value)/100));$('resetBtn').addEventListener('click',resetSimulation);$('modeSelect').addEventListener('change',e=>{mode=e.target.value;logEvent('Modo de controle alterado',`Modo ativo: ${modeLabel(mode)}.`);updateUI();});$('profileSelect').addEventListener('change',e=>setProfile(e.target.value));$('disturbanceLevel').addEventListener('input',e=>$('disturbanceOut').textContent=e.target.value+'%');$('clearLogBtn').addEventListener('click',()=>{events=[];renderLog();});$('benchBtn').addEventListener('click',runBenchmark);window.addEventListener('resize',resize);
+loadReferenceBenchmark();resize();logEvent('Ambiente pronto','Política Q-learning carregada. O benchmark de referência avalia seis classes de perturbação não vistas no treino.');updateUI();requestAnimationFrame(frame);
+</script>
+</body>
+</html>
